@@ -8,6 +8,6 @@ export default (state=null, action) => {
     case 'PLACE_PEG':
       return action.result;
     default:
-      return board;
+      return state || board;
   }
 }

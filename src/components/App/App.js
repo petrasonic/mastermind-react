@@ -11,11 +11,10 @@ class App extends Component {
       boardState,
       gameState,
       // results,
-      // turn,
+      turn,
     } = this.props;
     const {
       results,
-      turn,
       colours
     } = gameState;
     return (
@@ -49,6 +48,7 @@ class App extends Component {
                     index={index + 1}
                     pegs={row}
                     results={results[index]}
+                    turn={turn}
                     activeRow={turn === index}
                     key={index}
                   />

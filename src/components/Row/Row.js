@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { placePeg, clearRow } from '../../actions';
+import { placePeg, incrementTurn } from '../../actions';
 import Peg from '../Peg';
 import Results from '../Results';
 
@@ -17,6 +17,12 @@ class Row extends Component {
     }
     return jsxPegs;
   }
+
+  hanldeRowCheckClick = () => {
+    const { incrementTurn, turn } = this.props;
+    incrementTurn(turn);
+  }
+
   render() {
     const {
       index,
@@ -33,7 +39,7 @@ class Row extends Component {
           <Results results={results} index={index} />
         </td>
         <td>
-          {activeRow && <button className="btn btn-default btn-xs">Check</button>}
+          {activeRow && <button className="btn btn-default btn-xs" onClick={this.hanldeRowCheckClick}>Check</button>}
         </td>
       </tr>
     );
@@ -46,7 +52,7 @@ const mapStateToProps = (state /*, ownProps*/) => {
   }
 }
 
-const mapDispatchToProps = { placePeg, clearRow };
+const mapDispatchToProps = { placePeg, incrementTurn };
 
 export default connect(
   mapStateToProps,

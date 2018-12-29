@@ -5,9 +5,16 @@ export const placePeg = (input) => {
   };
 };
 
-export const clearRow = (input) => {
+export const incrementTurn = (input) => {
   return {
-    type: 'CLEAR_ROW',
-    result: 'test2',
+    type: 'INCREMENT_TURN',
+    result: input,
+  };
+};
+
+export const checkRow = (input) => {
+  return {
+    type: 'CHECK_ROW',
+    result: input,
   };
 };

@@ -4,7 +4,6 @@ const colours = ['red','green','blue','yellow','brown','orange','black','white']
 
 const gameState = {
   colours,
-  turn: 0,
   code: [...new Array(boardWidth)].map((_, i) => colours[Math.floor(Math.random() * colours.length)]),
   results: [...Array(boardHeight).keys()].map(i => Array(boardWidth)),
   endGame: false,
