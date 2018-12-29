@@ -1,10 +1,23 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux";
 import Row from '../Row';
 import Peg from '../Peg';
 import './App.css';
 
 class App extends Component {
   render() {
+    const {
+      // colours,
+      boardState,
+      gameState,
+      // results,
+      // turn,
+    } = this.props;
+    const {
+      results,
+      turn,
+      colours
+    } = gameState;
     return (
       <div className="container">
         <div className="text-center body">
@@ -31,24 +44,22 @@ class App extends Component {
                   <td>&nbsp;</td>
                   <td>&nbsp;</td>
                 </tr>
-                <Row
-                  index={1}
-                  pegs={['green', 'red', 'white', 'blue']}
-                  results={['red', 'white']}
-                  activeRow={true}
-                />
+                {boardState.map((row, index) => (
+                  <Row
+                    index={index + 1}
+                    pegs={row}
+                    results={results[index]}
+                    activeRow={turn === index}
+                    key={index}
+                  />
+                ))}
               </tbody>
             </table>
 
             <div className="selection-area" data-intro="Select pegs by clicking on them" data-position="left">
-              <Peg colour="red" />
-              <Peg colour="green" />
-              <Peg colour="blue" />
-              <Peg colour="yellow" />
-              <Peg colour="brown" />
-              <Peg colour="orange" />
-              <Peg colour="black" />
-              <Peg colour="white" />
+              {colours.map(colour => (
+                <Peg colour={colour} key={`selection-${colour}`} />
+              ))}
               <button type="button" name="clear" className="btn btn-default btn-xs btn-block">Clear Current Row</button>
             </div>
 
@@ -67,4 +78,11 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state /*, ownProps*/) => {
+  return state;
+}
+
+export default connect(
+  mapStateToProps,
+  // mapDispatchToProps
+)(App);
