@@ -1,7 +1,6 @@
-const boardWidth = 4;
-const colours = ['red','green','blue','yellow','brown','orange','black','white'];
+import { BOARD_WIDTH, COLOURS } from '../config';
 
-const code = [...new Array(boardWidth)].map((_, i) => colours[Math.floor(Math.random() * colours.length)]);
+const code = [...new Array(BOARD_WIDTH)].map((_, i) => COLOURS[Math.floor(Math.random() * COLOURS.length)]);
 
 export default (state=null, action) => {
   switch (action.type) {

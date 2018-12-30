@@ -1,7 +1,6 @@
-const boardHeight = 10;
-const boardWidth = 4;
+import { BOARD_HEIGHT, BOARD_WIDTH } from '../config';
 
-const results = [...Array(boardHeight).keys()].map(i => Array(boardWidth));
+const results = [...Array(BOARD_HEIGHT).keys()].map(i => Array(BOARD_WIDTH));
 
 export default (state=null, action) => {
   switch (action.type) {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
+import { COLOURS } from '../../config';
 import Row from '../Row';
 import Peg from '../Peg';
 import './App.css';
@@ -7,16 +8,12 @@ import './App.css';
 class App extends Component {
   render() {
     const {
-      // colours,
       boardState,
-      gameState,
       results,
       code,
       turn,
     } = this.props;
-    const {
-      colours,
-    } = gameState;
+
     return (
       <div className="container">
         <div className="text-center body">
@@ -48,7 +45,7 @@ class App extends Component {
             </table>
 
             <div className="selection-area" data-intro="Select pegs by clicking on them" data-position="left">
-              {colours.map(colour => (
+              {COLOURS.map(colour => (
                 <Peg colour={colour} key={`selection-${colour}`} />
               ))}
               <button type="button" name="clear" className="btn btn-default btn-xs btn-block">Clear Current Row</button>
