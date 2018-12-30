@@ -4,12 +4,12 @@ import Peg from '../Peg';
 const Results = (props) => {
   const {
     index,
-    results,
+    rowResults,
   } = props;
   const jsxPegs = [];
-  for (let i=0; i<results.length; i+=1) {
+  for (let i=0; i<rowResults.length; i+=1) {
     jsxPegs.push((
-      results[i] && <Peg colour={results[i]} results key={`results-${index}-${i}`} />
+      rowResults[i] && <Peg colour={rowResults[i]} result key={`result-${index}-${i}`} />
     ));
   }
   return <div>{jsxPegs}</div>;

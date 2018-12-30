@@ -23,10 +23,10 @@ class Peg extends React.Component {
   render() {
     const {
       colour,
-      results = false,
+      result = false,
     } = this.props;
 
-    const type = results ? 'small-circle' : 'circle';
+    const type = result ? 'small-circle' : 'circle';
     return <div className={`${type} ${colour}`} onClick={this.handlePegClick} />;
   }
 };

@@ -10,12 +10,12 @@ class App extends Component {
       // colours,
       boardState,
       gameState,
-      // results,
+      results,
+      code,
       turn,
     } = this.props;
     const {
-      results,
-      colours
+      colours,
     } = gameState;
     return (
       <div className="container">
@@ -26,20 +26,11 @@ class App extends Component {
               <tbody>
                 <tr className="closed-hood">
                   <td>&nbsp;</td>
-
-                  <td className="open-hood-cell">
-                    <Peg colour="red" />
-                  </td>
-                  <td className="open-hood-cell">
-                    <Peg colour="red" />
-                  </td>
-                  <td className="open-hood-cell">
-                    <Peg colour="red" />
-                  </td>
-                  <td className="open-hood-cell">
-                    <Peg colour="red" />
-                  </td>
-
+                  {code.map((peg, index) => (
+                    <td className="open-hood-cell" key={`code-${index}`}>
+                      <Peg colour={peg} />
+                    </td>
+                  ))}
                   <td>&nbsp;</td>
                   <td>&nbsp;</td>
                 </tr>
@@ -47,7 +38,7 @@ class App extends Component {
                   <Row
                     index={index + 1}
                     pegs={row}
-                    results={results[index]}
+                    rowResults={results[index]}
                     turn={turn}
                     activeRow={turn === index}
                     key={index}

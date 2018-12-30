@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { placePeg, incrementTurn } from '../../actions';
+import { placePeg, incrementTurn, checkRow } from '../../actions';
 import Peg from '../Peg';
 import Results from '../Results';
 
@@ -19,15 +19,23 @@ class Row extends Component {
   }
 
   hanldeRowCheckClick = () => {
-    const { incrementTurn, turn } = this.props;
+    const {
+      incrementTurn,
+      turn,
+      checkRow,
+      pegs,
+      code,
+    } = this.props;
     incrementTurn(turn);
+    // TODO see if theses function calls can be amalgamated
+    checkRow(pegs, code, turn);
   }
 
   render() {
     const {
       index,
       pegs,
-      results,
+      rowResults,
       activeRow
     } = this.props;
 
@@ -36,10 +44,16 @@ class Row extends Component {
         <td>{index}</td>
         {this.renderPegs(pegs)}
         <td className="results-cell">
-          <Results results={results} index={index} />
+          <Results rowResults={rowResults} index={index} />
         </td>
         <td>
-          {activeRow && <button className="btn btn-default btn-xs" onClick={this.hanldeRowCheckClick}>Check</button>}
+          {activeRow && <button
+            className="btn btn-default btn-xs"
+            disabled={!pegs[pegs.length-1]}
+            onClick={this.hanldeRowCheckClick}>
+              Check
+            </button>
+          }
         </td>
       </tr>
     );
@@ -47,12 +61,10 @@ class Row extends Component {
 };
 
 const mapStateToProps = (state /*, ownProps*/) => {
-  return {
-    row: state.row
-  }
+  return state;
 }
 
-const mapDispatchToProps = { placePeg, incrementTurn };
+const mapDispatchToProps = { placePeg, incrementTurn, checkRow };
 
 export default connect(
   mapStateToProps,

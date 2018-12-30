@@ -5,16 +5,20 @@ export const placePeg = (input) => {
   };
 };
 
-export const incrementTurn = (input) => {
+export const incrementTurn = (turn) => {
   return {
     type: 'INCREMENT_TURN',
-    result: input,
+    result: turn,
   };
 };
 
-export const checkRow = (input) => {
+export const checkRow = (guess, code, turn) => {
+  // TODO: return the result peg array here
   return {
     type: 'CHECK_ROW',
-    result: input,
+    result: {
+      result: ['red', 'white', null, null],
+      turn,
+    },
   };
 };
