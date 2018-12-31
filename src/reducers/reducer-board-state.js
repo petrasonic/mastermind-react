@@ -11,6 +11,8 @@ export default (state=null, action) => {
       const newState = [...state];
       newState[turn] = Array(BOARD_WIDTH);
       return newState;
+    case 'NEW_GAME':
+      return board;
     default:
       return state || board;
   }

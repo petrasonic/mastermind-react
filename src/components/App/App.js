@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { COLOURS } from '../../config';
 import Row from '../Row';
 import Peg from '../Peg';
-import { clearRow } from '../../actions';
+import { clearRow, newGame } from '../../actions';
 import './App.css';
 
 class App extends Component {
@@ -14,6 +14,12 @@ class App extends Component {
     } = this.props
     clearRow(turn);
   }
+
+  handleNewGameButtonClick = () => {
+    const { newGame } = this.props;
+    newGame();
+  }
+
   render() {
     const {
       boardState,
@@ -69,7 +75,14 @@ class App extends Component {
           </div>
 
           <div className="well center-block">
-            <button type="button" name="newGame" className="btn btn-primary btn-block">New Game</button>
+            <button
+              type="button"
+              name="newGame"
+              className="btn btn-primary btn-block"
+              onClick={this.handleNewGameButtonClick}
+            >
+              New Game
+            </button>
             <button type="button" name="clear" className="btn btn-success btn-block" data-intro="Have the computer think for you 🤖" data-position="left">Play Self</button>
             {/* <button type="button" name="help" className="btn btn-default btn-block">Help</button> */}
           </div>
@@ -85,7 +98,7 @@ const mapStateToProps = (state /*, ownProps*/) => {
   return state;
 }
 
-const mapDispatchToProps = { clearRow };
+const mapDispatchToProps = { clearRow, newGame };
 
 export default connect(
   mapStateToProps,

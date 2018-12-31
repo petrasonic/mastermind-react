@@ -31,3 +31,9 @@ export const clearRow = (turn) => {
     }
   };
 }
+
+export const newGame = (turn) => {
+  return {
+    type: 'NEW_GAME',
+  };
+}

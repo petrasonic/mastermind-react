@@ -1,12 +1,12 @@
 import { BOARD_WIDTH, COLOURS } from '../config';
 
-const code = [...new Array(BOARD_WIDTH)].map((_, i) => COLOURS[Math.floor(Math.random() * COLOURS.length)]);
+const generateCode = () => [...new Array(BOARD_WIDTH)].map((_, i) => COLOURS[Math.floor(Math.random() * COLOURS.length)]);
+const code = generateCode();
 
 export default (state=null, action) => {
   switch (action.type) {
-    // TODO
-    // case 'NEW_GAME':
-    //   return action.result;
+    case 'NEW_GAME':
+      return generateCode();
     default:
       return state || code;
   }

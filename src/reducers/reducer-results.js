@@ -12,6 +12,8 @@ export default (state=null, action) => {
       const newState = [...state];
       newState[turn] = result;
       return newState;
+    case 'NEW_GAME':
+      return results;
     default:
       return state || results;
   }
