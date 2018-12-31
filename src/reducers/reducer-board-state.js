@@ -6,6 +6,11 @@ export default (state=null, action) => {
   switch (action.type) {
     case 'PLACE_PEG':
       return action.result;
+    case 'CLEAR_ROW':
+      const { turn } = action.result;
+      const newState = [...state];
+      newState[turn] = Array(BOARD_WIDTH);
+      return newState;
     default:
       return state || board;
   }

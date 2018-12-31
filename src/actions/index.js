@@ -22,3 +22,12 @@ export const checkRow = (guess, code, turn) => {
     },
   };
 };
+
+export const clearRow = (turn) => {
+  return {
+    type: 'CLEAR_ROW',
+    result: {
+      turn,
+    }
+  };
+}

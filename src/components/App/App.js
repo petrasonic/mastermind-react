@@ -3,9 +3,17 @@ import { connect } from "react-redux";
 import { COLOURS } from '../../config';
 import Row from '../Row';
 import Peg from '../Peg';
+import { clearRow } from '../../actions';
 import './App.css';
 
 class App extends Component {
+  handleClearRowButtonClick = () => {
+    const {
+      clearRow,
+      turn,
+    } = this.props
+    clearRow(turn);
+  }
   render() {
     const {
       boardState,
@@ -48,7 +56,14 @@ class App extends Component {
               {COLOURS.map(colour => (
                 <Peg colour={colour} key={`selection-${colour}`} />
               ))}
-              <button type="button" name="clear" className="btn btn-default btn-xs btn-block">Clear Current Row</button>
+              <button
+                type="button"
+                name="clear"
+                className="btn btn-default btn-xs btn-block"
+                onClick={this.handleClearRowButtonClick}
+              >
+                Clear Current Row
+              </button>
             </div>
 
           </div>
@@ -70,7 +85,9 @@ const mapStateToProps = (state /*, ownProps*/) => {
   return state;
 }
 
+const mapDispatchToProps = { clearRow };
+
 export default connect(
   mapStateToProps,
-  // mapDispatchToProps
+  mapDispatchToProps
 )(App);
