@@ -26,9 +26,15 @@ class Row extends Component {
       pegs,
       code,
     } = this.props;
-    incrementTurn(turn);
-    // TODO see if theses function calls can be amalgamated
-    checkRow(pegs, code, turn);
+    const result = checkRow(pegs, code, turn).result.result;
+    if(
+      result.length===code.length &&
+      'red' === result.reduce((previous, current) => (previous===current) ? previous : NaN)
+    ) {
+      alert('You Win!');
+    } else {
+      incrementTurn(turn);
+    }
   }
 
   render() {
