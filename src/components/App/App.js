@@ -26,6 +26,7 @@ class App extends Component {
       results,
       code,
       turn,
+      gameEnded,
     } = this.props;
 
     return (
@@ -73,7 +74,8 @@ class App extends Component {
             </div>
 
           </div>
-
+          {/* TODO: make the modal pop up instead of this text */}
+          {gameEnded && 'game finished'}
           <div className="well center-block">
             <button
               type="button"

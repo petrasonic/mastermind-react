@@ -64,3 +64,9 @@ export const newGame = (turn) => {
     type: 'NEW_GAME',
   };
 }
+
+export const endGame = (turn) => {
+  return {
+    type: 'END_GAME',
+  };
+}

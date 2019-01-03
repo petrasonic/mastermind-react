@@ -1,5 +1,4 @@
 const gameState = {
-  endGame: false,
   showEndGameModal: false,
 };
 

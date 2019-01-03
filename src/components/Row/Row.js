@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { placePeg, incrementTurn, checkRow } from '../../actions';
+import { placePeg, incrementTurn, checkRow, endGame } from '../../actions';
 import Peg from '../Peg';
 import Results from '../Results';
 
@@ -21,6 +21,7 @@ class Row extends Component {
   hanldeRowCheckClick = () => {
     const {
       incrementTurn,
+      endGame,
       turn,
       checkRow,
       pegs,
@@ -31,7 +32,7 @@ class Row extends Component {
       result.length===code.length &&
       'red' === result.reduce((previous, current) => (previous===current) ? previous : NaN)
     ) {
-      alert('You Win!');
+      endGame();
     } else {
       incrementTurn(turn);
     }
@@ -70,7 +71,7 @@ const mapStateToProps = (state /*, ownProps*/) => {
   return state;
 }
 
-const mapDispatchToProps = { placePeg, incrementTurn, checkRow };
+const mapDispatchToProps = { placePeg, incrementTurn, checkRow, endGame };
 
 export default connect(
   mapStateToProps,
