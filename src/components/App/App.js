@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { COLOURS } from '../../config';
+import Modal from '../Modal';
 import Row from '../Row';
 import Peg from '../Peg';
 import { clearRow, newGame } from '../../actions';
@@ -90,13 +91,12 @@ class App extends Component {
             {/* <button type="button" name="help" className="btn btn-default btn-block">Help</button> */}
           </div>
 
-          {/* TODO: move modal to own component and make the close button work. Also make it show if you lose the game and say you lost. */}
-          {showEndGameModal && (<div className="mini-modal">
-            <div className="close-btn">&times;</div>
-            <h3>You win</h3>
-            <p>Congrats! <span role="img" aria-label="thumbs up">👍🏻</span></p>
-          </div>)}
-
+          {/* TODO: Make modal show if you lose the game and say you lost. */}
+          <Modal
+            show={showEndGameModal}
+            title="You win"
+            content={<p>Congrats! <span role="img" aria-label="thumbs up">👍🏻</span></p>}
+          />
         </div>
         <footer>&copy; Dave Petrasovic</footer>
       </div>

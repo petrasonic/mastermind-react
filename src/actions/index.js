@@ -70,3 +70,9 @@ export const endGame = (turn) => {
     type: 'END_GAME',
   };
 }
+
+export const closeModal = () => {
+  return {
+    type: 'CLOSE_MODAL',
+  }
+}
