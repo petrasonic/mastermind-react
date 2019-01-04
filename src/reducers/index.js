@@ -4,7 +4,7 @@ import TurnReducer from './reducer-turn';
 import CodeReducer from './reducer-code';
 import ResultsReducer from './reducer-results';
 import EndGameReducer from './reducer-end-game';
-import OtherReducer from './reducer-other';
+import ShowEndGameModalReducer from './reducer-show-end-game-modal';
 
 const rootReducer = combineReducers({
   boardState: BoardStateReducer,
@@ -12,7 +12,7 @@ const rootReducer = combineReducers({
   code: CodeReducer,
   results: ResultsReducer,
   gameEnded: EndGameReducer,
-  gameState: OtherReducer
+  showEndGameModal: ShowEndGameModalReducer,
 });
 
 export default rootReducer;

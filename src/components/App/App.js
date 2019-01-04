@@ -27,6 +27,7 @@ class App extends Component {
       code,
       turn,
       gameEnded,
+      showEndGameModal,
     } = this.props;
 
     return (
@@ -68,14 +69,14 @@ class App extends Component {
                 name="clear"
                 className="btn btn-default btn-xs btn-block"
                 onClick={this.handleClearRowButtonClick}
+                disabled={gameEnded}
               >
                 Clear Current Row
               </button>
             </div>
 
           </div>
-          {/* TODO: make the modal pop up instead of this text */}
-          {gameEnded && 'game finished'}
+
           <div className="well center-block">
             <button
               type="button"
@@ -88,6 +89,13 @@ class App extends Component {
             <button type="button" name="clear" className="btn btn-success btn-block" data-intro="Have the computer think for you 🤖" data-position="left">Play Self</button>
             {/* <button type="button" name="help" className="btn btn-default btn-block">Help</button> */}
           </div>
+
+          {/* TODO: move modal to own component and make the close button work. Also make it show if you lose the game and say you lost. */}
+          {showEndGameModal && (<div className="mini-modal">
+            <div className="close-btn">&times;</div>
+            <h3>You win</h3>
+            <p>Congrats! <span role="img" aria-label="thumbs up">👍🏻</span></p>
+          </div>)}
 
         </div>
         <footer>&copy; Dave Petrasovic</footer>

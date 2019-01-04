@@ -43,7 +43,8 @@ class Row extends Component {
       index,
       pegs,
       rowResults,
-      activeRow
+      activeRow,
+      gameEnded
     } = this.props;
 
     return (
@@ -56,7 +57,7 @@ class Row extends Component {
         <td>
           {activeRow && <button
             className="btn btn-default btn-xs"
-            disabled={!pegs[pegs.length-1]}
+            disabled={!pegs[pegs.length-1] || gameEnded}
             onClick={this.hanldeRowCheckClick}>
               Check
             </button>
