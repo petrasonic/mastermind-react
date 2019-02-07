@@ -38,11 +38,11 @@ class App extends Component {
           <div className="board-container">
             <table className="board" data-intro="Try to guess the hidden pattern in under 10 tries" data-position="left">
               <tbody>
-                <tr className="closed-hood">
+                <tr className={gameEnded ? '' : 'closed-hood'}>
                   <td>&nbsp;</td>
                   {code.map((peg, index) => (
-                    <td className="open-hood-cell" key={`code-${index}`}>
-                      <Peg colour={peg} />
+                    <td className={gameEnded ? 'open-hood-cell' : ''} key={`code-${index}`}>
+                      {!gameEnded ? '?' : <Peg colour={peg} />}
                     </td>
                   ))}
                   <td>&nbsp;</td>
@@ -63,7 +63,7 @@ class App extends Component {
 
             <div className="selection-area" data-intro="Select pegs by clicking on them" data-position="left">
               {COLOURS.map(colour => (
-                <Peg colour={colour} key={`selection-${colour}`} />
+                <Peg colour={colour} key={`selection-${colour}`} clickable />
               ))}
               <button
                 type="button"
