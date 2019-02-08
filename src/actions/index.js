@@ -1,4 +1,5 @@
 import { BOARD_WIDTH } from '../config';
+import store from '../store';
 
 export const placePeg = (input) => {
   return {
@@ -7,38 +8,40 @@ export const placePeg = (input) => {
   };
 };
 
-export const incrementTurn = (turn) => {
+export const incrementTurn = () => {
+  const { turn } = store.getState();
   return {
     type: 'INCREMENT_TURN',
     result: turn,
   };
 };
 
-export const checkRow = (originalGuess, code, turn) => {
+export const checkRow = (originalGuess) => {
+  const { turn, code } = store.getState();
   let resultIndex = 0;
   let guess = [...originalGuess];
   let codeToCheck = [...code];
   const result = [];
 
-  //check exact matches
-  for (let i=0; i<BOARD_WIDTH;i++) {
-    if(guess[i]===code[i]){
+  // check exact matches
+  for (let i=0; i<BOARD_WIDTH; i+=1) {
+    if (guess[i]===code[i]) {
       guess.splice(i,1, undefined);
       codeToCheck.splice(i,1, undefined);
       result[resultIndex] = 'red';
-      resultIndex++;
+      resultIndex+=1;
     }
   }
   guess = guess.filter(n => n !== undefined);
   codeToCheck = codeToCheck.filter(n => n !== undefined);
 
-  //check partial matches
-  for (let i=0; i<guess.length; i++) {
+  // check partial matches
+  for (let i=0; i<guess.length; i+=1) {
     let indexInCode = codeToCheck.indexOf(guess[i]);
     if (indexInCode!==-1) {
       codeToCheck.splice(indexInCode,1);
       result[resultIndex] = 'white';
-      resultIndex++;
+      resultIndex+=1;
     }
   }
   return {
@@ -59,13 +62,13 @@ export const clearRow = (turn) => {
   };
 }
 
-export const newGame = (turn) => {
+export const newGame = () => {
   return {
     type: 'NEW_GAME',
   };
 }
 
-export const endGame = (turn) => {
+export const endGame = () => {
   return {
     type: 'END_GAME',
   };

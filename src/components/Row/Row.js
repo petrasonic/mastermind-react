@@ -22,19 +22,18 @@ class Row extends Component {
     const {
       incrementTurn,
       endGame,
-      turn,
       checkRow,
       pegs,
       code,
     } = this.props;
-    const result = checkRow(pegs, code, turn).result.result;
+    const result = checkRow(pegs).result.result;
     if(
       result.length===code.length &&
       'red' === result.reduce((previous, current) => (previous===current) ? previous : NaN)
     ) {
       endGame();
     } else {
-      incrementTurn(turn);
+      incrementTurn();
     }
   }
 

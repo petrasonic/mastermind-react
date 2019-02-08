@@ -5,6 +5,7 @@ import Modal from '../Modal';
 import Row from '../Row';
 import Peg from '../Peg';
 import { clearRow, newGame } from '../../actions';
+import { startPlaySelf } from '../../utils/selfPlayUtils';
 import './App.css';
 
 class App extends Component {
@@ -19,6 +20,10 @@ class App extends Component {
   handleNewGameButtonClick = () => {
     const { newGame } = this.props;
     newGame();
+  }
+
+  handlePlaySelfButtonClick = () => {
+    startPlaySelf();
   }
 
   render() {
@@ -87,15 +92,23 @@ class App extends Component {
             >
               New Game
             </button>
-            <button type="button" name="clear" className="btn btn-success btn-block" data-intro="Have the computer think for you 🤖" data-position="left">Play Self</button>
+            <button
+              type="button"
+              name="play-self"
+              className="btn btn-success btn-block"
+              data-intro="Have the computer think for you 🤖"
+              data-position="left"
+              onClick={this.handlePlaySelfButtonClick}
+            >
+              Play Self
+            </button>
             {/* <button type="button" name="help" className="btn btn-default btn-block">Help</button> */}
           </div>
 
-          {/* TODO: Make modal show if you lose the game and say you lost. */}
           <Modal
             show={showEndGameModal}
             title="You win"
-            content={<p>Congrats! <span role="img" aria-label="thumbs up">👍🏻</span></p>}
+            content={<p>Congrats! You won in {turn + 1} turns <span role="img" aria-label="thumbs up">👍🏻</span></p>}
           />
         </div>
         <footer>&copy; Dave Petrasovic</footer>
