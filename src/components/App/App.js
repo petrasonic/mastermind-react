@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { COLOURS } from '../../config';
+import _ from 'lodash';
+import { COLOURS, BOARD_HEIGHT, BOARD_WIDTH } from '../../config';
 import Modal from '../Modal';
 import Row from '../Row';
 import Peg from '../Peg';
@@ -36,6 +37,8 @@ class App extends Component {
       showEndGameModal,
     } = this.props;
 
+    const youLost = turn >= BOARD_HEIGHT &&
+                    !_.isEqual(results[BOARD_HEIGHT-1], Array.apply(null , {length: BOARD_WIDTH}).map(()=>'red'));
     return (
       <div className="container">
         <div className="text-center body">
@@ -107,8 +110,11 @@ class App extends Component {
 
           <Modal
             show={showEndGameModal}
-            title="You win"
-            content={<p>Congrats! You won in {turn + 1} turns <span role="img" aria-label="thumbs up">👍🏻</span></p>}
+            title={youLost ? 'Game Over' : 'You win'}
+            content={youLost ?
+              <p>You did not win <span role="img" aria-label="thumbs up">😟</span></p> :
+              <p>Congrats! You won in {turn + 1} turns <span role="img" aria-label="thumbs up">👍🏻</span></p>
+            }
           />
         </div>
         <footer>&copy; Dave Petrasovic</footer>

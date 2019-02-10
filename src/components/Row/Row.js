@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { placePeg, incrementTurn, checkRow, endGame } from '../../actions';
 import Peg from '../Peg';
 import Results from '../Results';
+import { BOARD_HEIGHT } from '../../config';
 
 class Row extends Component {
   renderPegs = (pegs) => {
@@ -25,6 +26,7 @@ class Row extends Component {
       checkRow,
       pegs,
       code,
+      turn,
     } = this.props;
     const result = checkRow(pegs).result.result;
     if(
@@ -34,6 +36,9 @@ class Row extends Component {
       endGame();
     } else {
       incrementTurn();
+      if (turn >= BOARD_HEIGHT - 1) {
+        endGame();
+      }
     }
   }
 
