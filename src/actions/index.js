@@ -1,10 +1,19 @@
 import { BOARD_WIDTH } from '../config';
 import store from '../store';
 
-export const placePeg = (input) => {
+export const placePeg = (colour) => {
+  const { boardState, turn } = store.getState();
+  const newBoard = [...boardState];
+  const currentRow = [...newBoard[turn]];
+  const nextPegHole = currentRow.findIndex(element => !element);
+  if (nextPegHole===-1) return { type: 'DONT_PLACE_PEG' }; // row full
+
+  currentRow[nextPegHole] = colour;
+  newBoard[turn] = currentRow;
+
   return {
     type: 'PLACE_PEG',
-    result: input,
+    result: newBoard,
   };
 };
 

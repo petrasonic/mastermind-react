@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 import { COLOURS, BOARD_WIDTH } from '../config';
 import store from '../store';
-import { placePeg, checkRow } from '../actions';
+import { placePeg, checkRow, endGame, incrementTurn } from '../actions';
 
 let possibilities = [], outcomes = [], firstPass=true;
 const startPlaySelf = () => {
@@ -18,16 +18,16 @@ const startPlaySelf = () => {
 }
 
 const playSelf = (sequenceToGuess) => {
-  const { gameEnded, boardState, turn, results } = store.getState();
   doGuess(sequenceToGuess);
+  const { gameEnded, boardState, turn, results } = store.getState();
 
   // check if game won
   if (gameEnded) return;
 
   // trim posibilites that cannot exist
   for (let i=0; i<possibilities.length; i+=1) {
-    const checkedResults = checkGuessToAnswer(possibilities[i], boardState[turn]);
-    const actualResults = _.clone(results[turn]);
+    const checkedResults = checkGuessToAnswer(possibilities[i], boardState[turn - 1]);
+    const actualResults = _.clone(results[turn - 1]);
     if (!_.isEqual(checkedResults, actualResults)) {
       possibilities.splice(i, 1);
       i-=1;
@@ -71,17 +71,25 @@ const playSelf = (sequenceToGuess) => {
 
 const doGuess = (sequenceToGuess) => {
   for (let i=0; i<BOARD_WIDTH; i+=1) {
-    // TODO remove the timeouts/ do proper with promises
-    setTimeout(() => { store.dispatch(placePeg(sequenceToGuess[i])); }, 10);
+    store.dispatch(placePeg(sequenceToGuess[i]));
   }
-  setTimeout(() => { store.dispatch(checkRow()); }, 100);
+  const { result } = store.dispatch(checkRow(sequenceToGuess));
+  const r = result.result;
+  if(
+    r.length===BOARD_WIDTH &&
+    'red' === r.reduce((previous, current) => (previous===current) ? previous : NaN)
+  ) {
+    store.dispatch(endGame());
+  } else {
+    store.dispatch(incrementTurn());
+  }
 }
 
 const checkGuessToAnswer = (guessInput, answerInput) => {
   let guess = _.clone(guessInput);
   let answer = _.clone(answerInput);
   let resultIndex = 0;
-  let testResults = Array(BOARD_WIDTH);
+  let testResults = [];
 
   //check exact matches
   for (let i=0; i<BOARD_WIDTH; i+=1) {

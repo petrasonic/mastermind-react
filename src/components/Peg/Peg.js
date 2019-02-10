@@ -7,19 +7,10 @@ class Peg extends React.Component {
     const {
       colour,
       placePeg,
-      boardState,
-      turn,
       clickable,
     } = this.props;
     if (!clickable) return;
-    const newBoard = [...boardState];
-    const currentRow = [...newBoard[turn]];
-    const nextPegHole = currentRow.findIndex(element => !element);
-    if (nextPegHole===-1) return;
-
-    currentRow[nextPegHole] = colour;
-    newBoard[turn] = currentRow;
-    placePeg(newBoard);
+    placePeg(colour);
   }
 
   render() {
