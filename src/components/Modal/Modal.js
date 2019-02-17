@@ -1,5 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux'
+import ModalWrapperStyle from './modalWrapperStyle';
+import CloseButtonStyle from './closeButtonStyle';
+import ModalHeadingStyle from './modalHeadingStyle';
 import { closeModal } from '../../actions'
 
 class Modal extends React.Component {
@@ -18,21 +21,18 @@ class Modal extends React.Component {
     if (!show) return null;
 
     return (
-      <div className="mini-modal">
-        <div
-          className="close-btn"
-          onClick={this.handleCloseClick}
-        >
+      <ModalWrapperStyle>
+        <CloseButtonStyle onClick={this.handleCloseClick}>
           &times;
-        </div>
-        <h3>{title}</h3>
+        </CloseButtonStyle>
+        <ModalHeadingStyle>{title}</ModalHeadingStyle>
         {content}
-      </div>
+      </ModalWrapperStyle>
     );
   }
 };
 
-const mapStateToProps = (state /*, ownProps*/) => {
+const mapStateToProps = (state) => {
   return state;
 }
 
