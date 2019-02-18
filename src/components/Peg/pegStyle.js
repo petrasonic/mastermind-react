@@ -42,6 +42,8 @@ export default styled.div`
         return 'radial-gradient(circle at 8px 6px, #333, #000)'
       case 'white':
         return props.type === 'small-circle' ? 'radial-gradient(circle at 3px 1px, #fff, #868686)' : 'radial-gradient(circle at 8px 6px, #fff, #868686)'
+      default:
+        return 'radial-gradient(circle at 8px 6px, #f00, #632222)';
     }
   }};
 `;

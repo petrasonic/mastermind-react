@@ -10,26 +10,12 @@ html, body{
 .body{
   padding-bottom: 40px;
 }
-footer{
-  position: absolute;
-  bottom: 0;
-  height: 40px;
-  width: calc(100% - 30px);
-  text-align: center;
-  color: #666;
-  font-size: 15px;
-}
 
 body{
   color: #fff;
   background-color: #222;
   font-family: 'Orbitron', sans-serif;
   font-size: 20px;
-}
-h1{
-  color: #349190;
-  text-transform: uppercase;
-  font-family: 'Audiowide', cursive;
 }
 .board-container{
   background-color: #333;
@@ -49,33 +35,6 @@ h1{
   width: 1.6em;
   text-align: center;
 }
-.board tr.closed-hood{
-  text-align: center;
-  height: 2.13em;
-}
-.board tr .open-hood-cell{
-  background-color: #666;
-  width: 1.71em;
-  height: 2.17em;
-  padding: 4px 1px 1px 1px;
-  line-height: initial;
-  position: relative;
-}
-.board tr .open-hood-cell::before{
-  content:"?";
-  background-color: #333;
-  width: 1.71em;
-  height: 2.27em;
-  position: absolute;
-  z-index: 3;
-  top: 0;
-  padding: 13px 5px;
-  text-align: center;
-  animation-name: fadeOut;
-  animation-duration: 4s;
-  opacity: 0;
-  margin: -2px 0 0 -1px;
-}
 @keyframes fadeOut {
     from {opacity: 1;}
     to {opacity: 0;}
@@ -84,16 +43,7 @@ h1{
     from {opacity: 0;}
     to {opacity: 1;}
 }
-.selection-area{
-  display: inline-block;
-  border-top: solid 1px #666;
-  padding-top: 0.8em;
-  margin-top: 0.8em;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-}
-.selection-area button{
+button[name="clear"]{
   display: block;
   letter-spacing: 1px;
 }

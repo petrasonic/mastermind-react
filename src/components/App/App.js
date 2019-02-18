@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import _ from 'lodash';
+import HeadingStyle from './headingStyle';
+import SelectionAreaStyle from './selectionAreaStyle';
+import HoodRowStyle from './hoodRowStyle';
+import HoodCellStyle from './hoodCellStyle';
+import FooterStyle from './footerStyle';
 import { COLOURS, BOARD_HEIGHT, BOARD_WIDTH } from '../../config';
 import Modal from '../Modal';
 import Row from '../Row';
@@ -42,20 +47,20 @@ class App extends Component {
     return (
       <div className="container">
         <div className="text-center body">
-          <h1 className="text-center">Mastermind</h1>
+          <HeadingStyle>Mastermind</HeadingStyle>
           <div className="board-container">
             <table className="board" data-intro="Try to guess the hidden pattern in under 10 tries" data-position="left">
               <tbody>
-                <tr className={gameEnded ? '' : 'closed-hood'}>
+                <HoodRowStyle gameEnded={gameEnded}>
                   <td>&nbsp;</td>
                   {code.map((peg, index) => (
-                    <td className={gameEnded ? 'open-hood-cell' : ''} key={`code-${index}`}>
+                    <HoodCellStyle gameEnded={gameEnded} key={`code-${index}`}>
                       {!gameEnded ? '?' : <Peg colour={peg} />}
-                    </td>
+                    </HoodCellStyle>
                   ))}
                   <td>&nbsp;</td>
                   <td>&nbsp;</td>
-                </tr>
+                </HoodRowStyle>
                 {boardState.map((row, index) => (
                   <Row
                     index={index + 1}
@@ -69,7 +74,7 @@ class App extends Component {
               </tbody>
             </table>
 
-            <div className="selection-area" data-intro="Select pegs by clicking on them" data-position="left">
+            <SelectionAreaStyle data-intro="Select pegs by clicking on them" data-position="left">
               {COLOURS.map(colour => (
                 <Peg colour={colour} key={`selection-${colour}`} clickable />
               ))}
@@ -82,7 +87,7 @@ class App extends Component {
               >
                 Clear Current Row
               </button>
-            </div>
+            </SelectionAreaStyle>
 
           </div>
 
@@ -117,7 +122,7 @@ class App extends Component {
             }
           />
         </div>
-        <footer>&copy; Dave Petrasovic</footer>
+        <FooterStyle>&copy; Dave Petrasovic</FooterStyle>
       </div>
     );
   }
