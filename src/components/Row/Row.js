@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import ResultsCellStyle from './resultsCellStyle';
+import PetCellStyle from './pegCellStyle';
 import { placePeg, incrementTurn, checkRow, endGame } from '../../actions';
 import Peg from '../Peg';
 import Results from '../Results';
@@ -11,9 +13,9 @@ class Row extends Component {
     const jsxPegs = [];
     for (let i=0; i<pegs.length; i+=1) { // .map does not iterate through empty arrays
       jsxPegs.push((
-        <td className="peg-cell" key={`${index}-${i}`}>
+        <PetCellStyle key={`${index}-${i}`}>
           {pegs[i] && <Peg colour={pegs[i]} />}
-        </td>
+        </PetCellStyle>
       ));
     }
     return jsxPegs;
@@ -55,9 +57,9 @@ class Row extends Component {
       <tr>
         <td>{index}</td>
         {this.renderPegs(pegs)}
-        <td className="results-cell">
+        <ResultsCellStyle>
           <Results rowResults={rowResults} index={index} />
-        </td>
+        </ResultsCellStyle>
         <td>
           {activeRow && <button
             className="btn btn-default btn-xs"
